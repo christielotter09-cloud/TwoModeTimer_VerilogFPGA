@@ -1,0 +1,38 @@
+`timescale 1 ns / 100 ps 		//modify the parameters accordingly
+
+module Reverser_tb;
+
+	reg [7:0] RevIn;	//The 8-bit BCD value input. Tips that is two 4-bit BCDs
+	reg ModeSel;		//Control signal to make the counting upwards RevIn to Counting downwards RevOut (HIGH) or pass the RevIn to the RevOut (LOW).
+	reg [7:0] LoadVal;
+	wire [7:0] RevOut;	//the 8-bit BCD value out
+
+	Reverser dut(
+	RevIn,
+	ModeSel,
+	LoadVal,
+	RevOut
+	);
+	integer i;
+	
+	initial
+	
+	begin	
+	LoadVal <= 59;
+	ModeSel <= 0;
+		for(i=0; i < 256; i = i + 1)
+		begin
+		RevIn = i;
+		#10;
+		end
+	ModeSel <= 1;
+		for(i=0; i < 256; i = i + 1)
+		begin
+		RevIn = i;
+		#10;
+		end
+		
+		$stop;
+	end
+	
+endmodule

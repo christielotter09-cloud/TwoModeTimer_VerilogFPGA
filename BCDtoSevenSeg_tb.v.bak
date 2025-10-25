@@ -1,0 +1,33 @@
+`timescale 1 ns / 100 ps    // Timescale for simulation
+
+module BCDtoSevenSeg_tb;
+
+    // Testbench signals
+    reg [3:0] bcd;
+    wire [6:0] seg;
+
+    // Instantiate the DUT (Device Under Test)
+    BCDtoSevenSeg dut (
+        .bcd(bcd),
+        .seg(seg)
+    );
+
+    integer i;
+
+    initial begin
+        // Loop through all BCD values from 0 to 9
+        for (i = 0; i <= 9; i = i + 1) begin
+            bcd = i[3:0];
+            #10;
+        end
+
+        // Test a few invalid inputs (10–15)
+        for (i = 10; i <= 15; i = i + 1) begin
+            bcd = i[3:0];
+            #10;
+        end
+
+        $stop;
+    end
+
+endmodule

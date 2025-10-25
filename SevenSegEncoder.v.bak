@@ -1,0 +1,15 @@
+module SevenSegEncoder (
+	
+	input [7:0] LSBBinary,	//The LSB binary value input
+	input [7:0] MSBBinary,	//The MSB bianry value input
+	input ModeSel,				//Control signal for the interal Reverser
+	
+	output [6:0] HexMSBH,	//The 7-Seg display Signal for higer-digit in MSB
+	output [6:0] HexMSBL,	//The 7-Seg display Signal for lower-digit in MSB
+	output [6:0] HexLSBH,	//The 7-Seg display Signal for higer-digit in LSB
+	output [6:0] HexLSBL		//The 7-Seg display Signal for lower-digit in LSB
+	
+
+);
+
+endmodule

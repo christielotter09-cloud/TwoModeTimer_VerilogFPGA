@@ -1,0 +1,46 @@
+`timescale 1 ns / 100 ps    // Timescale for simulation
+
+module counterReg_tb;
+
+parameter BIT_SIZE = 8;
+
+reg clk;
+reg rst_n;
+reg [BIT_SIZE-1:0] D;
+reg [BIT_SIZE-1:0] rst_val;
+wire [BIT_SIZE-1:0] Q;
+
+counterReg #(BIT_SIZE) dut (
+D,
+Q,
+clk,
+rst_n,
+rst_val
+);
+
+
+	always begin
+	#10 clk = ~clk;
+	end
+
+	initial begin
+	clk = 0;
+	rst_n = 0;
+	D = 8'b00000000;
+	rst_val = 8'b10011010;  // non-zero reset value
+
+
+	#15 rst_n = 1;  
+	#10 D = 8'b11110010;
+	#20 D = 8'b11001111;
+	#20 D = 8'b11001100;
+	#10 rst_n = 0;  
+	#10 rst_n = 1; 
+	#20 D = 8'b10110011;
+	#20 D = 8'b11111111;
+
+	#30;
+	$stop;
+	end
+
+endmodule
